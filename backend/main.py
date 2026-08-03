@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+
 app = FastAPI(title="RAG Platform")
 
 @app.get("/health")
@@ -13,3 +14,6 @@ app.add_middleware(CORSMiddleware,
     allow_origins=["http://localhost:3000"],
     allow_methods=["*"], allow_headers=["*"])
 app.include_router(doc_router)
+
+from backend.routes.search import router as search_router
+app.include_router(search_router)
