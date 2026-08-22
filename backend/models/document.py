@@ -18,3 +18,7 @@ class Chunk(Base):
     page_number=Column(Integer)
     embedding=Column(Vector(1024)) # 1024 dims for Cohere embed-v3
     created_at=Column(DateTime,server_default=func.now())
+    # metadata for dataset-sourced chunks (e.g. MSMARCO-XI ingestion)
+    chunk_strategy=Column(String, nullable=True)   # "fixed" | "sentence" | "semantic"
+    language=Column(String, nullable=True)          # e.g. "hi", "en"
+    source_query_id=Column(String, nullable=True)   # groups chunks back to their source query/passage set
